@@ -26,7 +26,6 @@ class ClarifaiExtension extends Extension
         unset($config['auth']);
 
         $apiClient = new Definition(Client::class, [
-            $config,
             $authConfig
         ]);
 

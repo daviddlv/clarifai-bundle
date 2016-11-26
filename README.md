@@ -1,7 +1,7 @@
 ClarifaiBundle
 ==============
 
-This bundle provides integration with [Clarifai](https://www.clarifai.com) with Symfony2. Features include:
+This bundle provides integration with [Clarifai](https://www.clarifai.com) with Symfony2.
 
 Installation
 ------------
@@ -55,12 +55,5 @@ clarifai:
 ``` php
     $client = $this->conrainer->get('clarifai.api.client');
     
-    // Get Usage Info
-    $usage = $client->usage();
-    
-    // Get image's tags
-    $tags = $client->tag(['url' => 'http://www.example.com/image.jpg']);
-    
-    // Get image's colors
-    $colors = $client->color(['url' => 'http://www.example.com/image.jpg']);
+    TODO
 ```

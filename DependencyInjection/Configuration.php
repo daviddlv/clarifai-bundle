@@ -22,7 +22,6 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->scalarNode('model')->defaultValue('general-v1.3')->end()
                 ->scalarNode('language')->defaultValue('en')->end()
                 ->arrayNode('auth')
                     ->addDefaultsIfNotSet()

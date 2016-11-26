@@ -1,8 +1,8 @@
 {
   "name": "daviddlv/clarifai-bundle",
   "type": "symfony-bundle",
-  "description": "",
-  "keywords": [],
+  "description": "Image recognition for your Symfony2 project using Clarifai",
+  "keywords": ["image","recognition","clarifai"],
   "license": "MIT",
   "authors": [
     {
@@ -13,15 +13,14 @@
   "minimum-stability": "dev",
   "require": {
     "symfony/framework-bundle": "~2.3|~3.0",
-    "guzzlehttp/guzzle": "~6.0",
-    "sainsburys/guzzle-oauth2-plugin": "~3.0"
+    "guzzlehttp/guzzle": "~6.0"
   },
   "autoload": {
     "psr-4": { "ClarifaiBundle\\": "" }
   },
   "extra": {
     "branch-alias": {
-      "dev-master": "1.0.x-dev"
+      "dev-master": "2.0.x-dev"
     }
   }
 }
