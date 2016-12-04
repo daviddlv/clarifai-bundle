@@ -72,6 +72,40 @@ class Client
 
     /**
      * @param $method
+     * @param $endpoint
+     * @param $data
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    public function request($method, $endpoint, $data)
+    {
+        if ($data instanceof ArrayableInterface) {
+            $data = $data->toArray();
+        }
+
+        $requestOption = $this->getRequestOption($method);
+        $data = array($requestOption => $data);
+
+        if ($requestOption === RequestOptions::BODY) {
+            if (!empty($data[$requestOption])) {
+                $data[$requestOption] = \GuzzleHttp\json_encode($data[$requestOption]);
+            } else {
+                unset($data[$requestOption]);
+            }
+
+            $data[RequestOptions::HEADERS] = array(
+                'Content-Type' => 'application/json',
+            );
+        }
+
+        $endpoint = sprintf(Client::CLARIFAI_API_PATTER_URI, $endpoint);
+
+        $response = $this->getClient()->request($method, $endpoint, $data);
+
+        return $response;
+    }
+
+    /**
+     * @param $method
      * @param $args
      * @return array
      */
@@ -88,30 +122,16 @@ class Client
             $data = $args[0];
         }
 
-        if ($data instanceof ArrayableInterface) {
-            $data = $data->toArray();
-        }
-
-        $requestOption = $this->getRequestOption($requestMethod);
-        $data = array($requestOption => $data);
-
-        if ($requestOption === RequestOptions::BODY) {
-            if (!empty($data[$requestOption])) {
-                $data[$requestOption] = \GuzzleHttp\json_encode($data[$requestOption]);
-            } else {
-                unset($data[$requestOption]);
-            }
-
-            $data[RequestOptions::HEADERS] = array(
-                'Content-Type' => 'application/json',
-            );
-        }
-
-        $response = $this->getClient()->request($requestMethod, sprintf(Client::CLARIFAI_API_PATTER_URI, str_replace('_', '/', $method)), $data);
+        $endpoint = str_replace('_', '/', $method);
+        $response = $this->request($requestMethod, $endpoint, $data);
 
         return \GuzzleHttp\json_decode($response->getBody()->getContents());
     }
 
+    /**
+     * @param $requestMethod
+     * @return string
+     */
     private function getRequestOption($requestMethod)
     {
         switch (strtoupper($requestMethod))
