@@ -55,7 +55,7 @@ class Data extends Param
         }
 
         if ($this->id) {
-            $array['id'] = $this->id;
+            $array['id'] = (string) $this->id;
         }
 
         if (!empty($this->concepts)) {
