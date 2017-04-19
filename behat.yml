@@ -1,0 +1,13 @@
+default:
+    suites:
+        default:
+            contexts:
+                - ClarifaiContext: ~
+    extensions:
+        Gorghoa\ScenarioStateBehatExtension\ServiceContainer\ScenarioStateExtension: ~
+        Behat\Symfony2Extension:
+            kernel:
+                env:       'test'
+                debug:     'true'
+                path:      'features/app/AppKernel.php'
+                bootstrap: 'features/app/bootstrap.php'
